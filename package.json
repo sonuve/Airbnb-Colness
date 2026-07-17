@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "browser-image-compression": "^2.0.2",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-error-boundary": "^6.1.1",
+    "react-lazy-load-image-component": "^1.6.3",
+    "react-slick": "^0.31.0",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^12.1.2",
+    "uuid": "^13.0.0"
+  }
+}
