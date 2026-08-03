@@ -34,7 +34,7 @@ router.get(
             maxAge: 24 * 60 * 60 * 1000,
         });
 
-        res.redirect(`http://localhost:5173/oauth-success?token=${token}`);
+        res.redirect(`https://airbnb-colness-frontend.onrender.com/oauth-success?token=${token}`);
     }
 );
 
