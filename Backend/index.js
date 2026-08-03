@@ -42,7 +42,7 @@ app.use(express.static("public")); // Serve static files from the "public" direc
 /* Middleware */
 app.use(cors({
     origin: [
-        "http://localhost:5173",
+        "https://airbnb-colness-frontend.onrender.com",
     ],
     credentials: true,
 }));
@@ -51,7 +51,7 @@ app.use(express.urlencoded({ extended: true, limit: "20mb" }));
 
 
 /* Apply rate limit only in production */
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "production") {
     app.use("/api", apiLimite);
 }
 
