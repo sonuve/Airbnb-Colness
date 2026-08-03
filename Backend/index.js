@@ -20,24 +20,19 @@ import "./Confige/passport.js";
 
 dotenv.config();
 
-/* Cashfree config */
+/* Cashfree Config */
 Cashfree.XClientId = process.env.CASHFREE_APP_ID;
 Cashfree.XClientSecret = process.env.CASHFREE_SECRET_KEY;
 Cashfree.Environment = "TEST";
 
 const app = express();
-app.use(passport.initialize());
 const server = http.createServer(app);
 const PORT = process.env.PORT || 3000;
-app.use(cookieParser());
-app.use(express.static("public")); // Serve static files from the "public" directory
 
 /* Middleware */
-
-app.use(cors({
-    origin: [
-        "https://airbnb-colness-frontend.onrender.com",
-    ],
+app.use(passport.initialize());
+app.use(cookieParser());
+app.use(express.static("public"));
 
 app.use(
   cors({
@@ -45,14 +40,12 @@ app.use(
     credentials: true,
   }),
 );
+
 app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true, limit: "20mb" }));
 
 /* Apply rate limit only in production */
 if (process.env.NODE_ENV === "production") {
-
-    app.use("/api", apiLimite);
-
   app.use("/api", apiLimite);
 }
 
@@ -67,13 +60,6 @@ app.use("/api/review", reviewRouter);
 initSocket(server);
 
 /* Start Server */
-server.listen(PORT, async() => {
-    console.log(`🚀 Server running on port ${PORT}`);
-    await connectDB();
-    timestamps;
-    bookingClean;
-
-
 server.listen(PORT, async () => {
   console.log(`🚀 Server running on port ${PORT}`);
   await connectDB();
