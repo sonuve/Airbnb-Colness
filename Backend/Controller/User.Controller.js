@@ -42,11 +42,14 @@ export const signup = async (req, res) => {
       expiresIn: "1d",
     });
 
+    const isProd = process.env.NODE_ENV === "production";
+
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true, // REQUIRED on HTTPS (Render uses HTTPS)
-      sameSite: "None",
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      secure: isProd,
+      sameSite: isProd ? "None" : "Lax",
+      path: "/",
+      maxAge: 24 * 60 * 60 * 1000,
     });
 
     return res.status(201).json({
@@ -102,10 +105,12 @@ export const login = async (req, res) => {
       expiresIn: "1d",
     });
 
+    const isProd = process.env.NODE_ENV === "production";
+
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: "None",
+      secure: isProd,
+      sameSite: isProd ? "None" : "Lax",
       path: "/",
       maxAge: 24 * 60 * 60 * 1000,
     });

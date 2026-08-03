@@ -34,10 +34,12 @@ router.get(
 
     const { token } = req.user;
 
+    const isProd = process.env.NODE_ENV === "production";
+
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "Lax",
+      secure: isProd,
+      sameSite: isProd ? "None" : "Lax",
       path: "/",
       maxAge: 24 * 60 * 60 * 1000,
     });
