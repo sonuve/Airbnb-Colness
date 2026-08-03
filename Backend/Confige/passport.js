@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/api/users/google/callback"
+        callbackURL: "https://airbnb-colness.onrender.com/api/users/google/callback"
     },
     async(accessToken, refreshToken, profile, done) => {
         try {
