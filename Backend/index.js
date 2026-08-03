@@ -18,8 +18,6 @@ import apiLimite from "./MiddleWare/rateLimites.js";
 import passport from "passport";
 import "./Confige/passport.js";
 
-
-
 dotenv.config();
 
 /* Cashfree config */
@@ -34,28 +32,29 @@ const PORT = process.env.PORT || 3000;
 app.use(cookieParser());
 app.use(express.static("public")); // Serve static files from the "public" directory
 
-
-
-
-
-
 /* Middleware */
+
 app.use(cors({
     origin: [
         "https://airbnb-colness-frontend.onrender.com",
     ],
+
+app.use(
+  cors({
+    origin: ["https://airbnb-colness-frontend.onrender.com"],
     credentials: true,
-}));
+  }),
+);
 app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true, limit: "20mb" }));
 
-
 /* Apply rate limit only in production */
 if (process.env.NODE_ENV === "production") {
+
     app.use("/api", apiLimite);
+
+  app.use("/api", apiLimite);
 }
-
-
 
 /* Routes */
 app.use("/api/users", userRouter);
@@ -74,4 +73,10 @@ server.listen(PORT, async() => {
     timestamps;
     bookingClean;
 
+
+server.listen(PORT, async () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+  await connectDB();
+  timestamps;
+  bookingClean;
 });
