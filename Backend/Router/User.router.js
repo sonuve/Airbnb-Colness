@@ -42,9 +42,6 @@ router.get(
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-        res.redirect(`https://airbnb-colness-frontend.onrender.com/oauth-success?token=${token}`);
-    }
-
     res.redirect(
       `https://airbnb-colness-frontend.onrender.com/oauth-success?token=${token}`,
     );
@@ -64,6 +61,5 @@ router.post(
 router.post("/save/:id", authenticateUser, savePost);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password", resetPassword);
-
 
 export default router;

@@ -3,25 +3,11 @@ import { Server } from "socket.io";
 let io;
 
 export const initSocket = (server) => {
-
-    io = new Server(server, {
-        cors: {
-            origin: (origin, callback) => {
-                const allowedOrigins = [
-                    "https://airbnb-colness-frontend.onrender.com",
-                ];
-                if (!origin || allowedOrigins.includes(origin)) {
-                    callback(null, true);
-                } else {
-                    callback(new Error("CORS not allowed"));
-                }
-            },
-            credentials: true
-
   io = new Server(server, {
     cors: {
       origin: (origin, callback) => {
         const allowedOrigins = ["https://airbnb-colness-frontend.onrender.com"];
+
         if (!origin || allowedOrigins.includes(origin)) {
           callback(null, true);
         } else {
@@ -49,14 +35,9 @@ export const initSocket = (server) => {
 };
 
 export const getIO = () => {
-
-    if (!io) {
-        throw new Error("Socket.io not initialized");
-    }
-    return io;
-
   if (!io) {
     throw new Error("Socket.io not initialized");
   }
+
   return io;
 };

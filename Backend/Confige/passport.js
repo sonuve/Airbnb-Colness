@@ -3,11 +3,6 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import User from "../Model/User.Model.js";
 import jwt from "jsonwebtoken";
 
-
-passport.use(new GoogleStrategy({
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "https://airbnb-colness.onrender.com/api/users/google/callback"
 passport.use(
   new GoogleStrategy(
     {
@@ -20,21 +15,19 @@ passport.use(
       try {
         const email = profile.emails[0].value;
 
-        // 🔍 Check if user already exists
+        // Check if user already exists
         let user = await User.findOne({ email });
 
+        // Create new user if not found
         if (!user) {
-          // 👉 Create new user
           user = await User.create({
             name: profile.displayName,
             email,
             googleId: profile.id,
           });
         }
-    }));
 
-
-        // 🎯 Generate SAME JWT like your login
+        // Generate JWT token
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
           expiresIn: "1d",
         });
@@ -46,3 +39,13 @@ passport.use(
     },
   ),
 );
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((obj, done) => {
+  done(null, obj);
+});
+
+export default passport;
