@@ -7,7 +7,7 @@ export const initSocket = (server) => {
         cors: {
             origin: (origin, callback) => {
                 const allowedOrigins = [
-                    "http://localhost:5173",
+                    "https://airbnb-colness-frontend.onrender.com",
                 ];
                 if (!origin || allowedOrigins.includes(origin)) {
                     callback(null, true);
