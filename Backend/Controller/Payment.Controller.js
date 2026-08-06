@@ -173,6 +173,8 @@ export const verifyPayment = async (req, res) => {
       checkOut: payment.booking.checkOut,
     });
 
+    console.log("Notification Sent");
+
     res.json({ success: true });
   } catch (error) {
     console.error(error.response.data || error.message || error);

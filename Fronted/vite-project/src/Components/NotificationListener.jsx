@@ -1,32 +1,28 @@
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
+import { socket } from "../Socket/Socket";
 import { useDispatch } from "react-redux";
-import { socket } from "../Socket/Socket.js";
-import { addNotification } from "../../Redux/SocketSlic.js";
+import { addNotification } from "../../Redux/SocketSlic";
 
-const NotificationListener = () => {
+function NotificationListener() {
   const dispatch = useDispatch();
 
-  // stable handler
-  const handleBookingNotification = useCallback((data) => {
-    console.log("📩 New booking:", data);
-    dispatch(addNotification(data));
-  }, [dispatch]);
-
   useEffect(() => {
-    if (!socket) return;
+    const receiveNotification = (data) => {
+      console.log("Notification Received");
 
-    // remove old listener to prevent duplicates
-    socket.off("booking-notification", handleBookingNotification);
+      console.log(data);
 
-    // add listener
-    socket.on("booking-notification", handleBookingNotification);
+      dispatch(addNotification(data));
+    };
+
+    socket.on("booking-notification", receiveNotification);
 
     return () => {
-      socket.off("booking-notification", handleBookingNotification);
+      socket.off("booking-notification", receiveNotification);
     };
-  }, [handleBookingNotification]);
+  }, []);
 
   return null;
-};
+}
 
 export default NotificationListener;
