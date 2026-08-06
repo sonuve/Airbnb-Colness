@@ -173,7 +173,7 @@ function Signup() {
 
         <button
           onClick={handleGoogleLogin}
-          className="w-full border border-gray-300 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-gray-50 transition"
+          className="w-full mt-4 border border-gray-300 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-gray-50 transition"
         >
           <FcGoogle size={20} />
           Continue with Google
