@@ -2,6 +2,7 @@ import React, { useState, useCallback, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
 import { IoMdEye, IoIosEyeOff } from "react-icons/io";
 const API_URL = import.meta.env.VITE_API_URL;
 function Signup() {
