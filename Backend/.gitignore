@@ -1,4 +1,11 @@
-node_modules
+# Dependencies
+node_modules/
+
+# Environment variables
 .env
-dist
-build
+.env.*
+!.env.example
+
+# Build files
+dist/
+build/
